@@ -8,15 +8,15 @@ export const company = {
   foundedYear: 2009,
   description:
     "Painting Doctorz is a premium residential and commercial painting studio delivering clinical precision, museum-grade finishes, and a white-glove client experience across interior and exterior projects.",
-  email: "paintingdoctorz@gmail.com",
- phoneDisplay: "+1 (647) 850-6881",
-  phoneHref: "+16478506881",
-  whatsappHref: "+16478506881",
+  email: "apaintingdoctorz@gmail.com",
+ phoneDisplay: "+1 (289) 788-8670",
+  phoneHref: "+12897888670",
+  whatsappHref: "+12897888670",
  address: {
-  street: "123 Main Street", // Replace with your actual business address
-  city: "Hamilton",
-  region: "Ontario",
-  postalCode: "L8P 1A1", // Replace with your actual postal code
+  street: "Hamilton", // Replace with your actual business address
+  city: "Burlington",
+  region: "Oakville, Brantford,",
+  postalCode: "St. Catharines, and surrounding areas", // Replace with your actual postal code
   country: "CA",
   countryName: "Canada",
 },
@@ -32,9 +32,9 @@ export const company = {
 
 export const socials = [
   { label: "Instagram", href: "https://instagram.com/paintingdoctorz" },
-  { label: "LinkedIn", href: "https://linkedin.com/company/paintingdoctorz" },
-  { label: "Pinterest", href: "https://pinterest.com/paintingdoctorz" },
-  { label: "Houzz", href: "https://houzz.com/pro/paintingdoctorz" },
+  // { label: "LinkedIn", href: "https://linkedin.com/company/paintingdoctorz" },
+  // { label: "Pinterest", href: "https://pinterest.com/paintingdoctorz" },
+  // { label: "Houzz", href: "https://houzz.com/pro/paintingdoctorz" },
 ];
 
 export const navLinks = [
@@ -77,13 +77,13 @@ export const navLinks = [
 ];
 
 export const businessHours = [
-  { day: "Monday", open: "09:00", close: "19:00" },
-  { day: "Tuesday", open: "09:00", close: "19:00" },
-  { day: "Wednesday", open: "09:00", close: "19:00" },
-  { day: "Thursday", open: "09:00", close: "19:00" },
-  { day: "Friday", open: "09:00", close: "19:00" },
-  { day: "Saturday", open: "10:00", close: "16:00" },
-  { day: "Sunday", open: null, close: null },
+  { day: "Monday", open: "08:00", close: "06:00" },
+  { day: "Tuesday",  open: "08:00", close: "06:00" },
+  { day: "Wednesday", open: "08:00", close: "06:00" },
+  { day: "Thursday", open: "08:00", close: "06:00" },
+  { day: "Friday", open: "08:00", close: "06:00" },
+  { day: "Saturday",  open: "08:00", close: "06:00" },
+  { day: "Sunday",  open: "08:00", close: "06:00" },
 ];
 
 export const services = [
@@ -461,41 +461,41 @@ export const transformations = [
     id: "living-room",
     label: "Interior",
     title: "Living Room",
-    caption: "Full interior repaint in warm neutrals — completed in 6 days.",
+    caption: "Tired beige walls reimagined in a warm, contemporary palette.",
     before:
-      "https://images.unsplash.com/photo-1503174971373-b1f69850bded?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=1400&q=80",
     after:
-      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1400&q=80",
   },
   {
     id: "bedroom",
     label: "Interior",
     title: "Bedroom Suite",
-    caption: "Low-VOC matte walls with hand-finished trim and joinery.",
+    caption: "Flat white walls transformed with a deep, moody accent tone.",
     before:
       "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1400&q=80",
     after:
       "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1400&q=80",
   },
   {
-    id: "facade",
-    label: "Exterior",
-    title: "House Façade",
-    caption: "Crack repair, priming, and an elastomeric weather-shield system.",
+    id: "dining",
+    label: "Interior",
+    title: "Dining Space",
+    caption: "A dated dining room brought to life with a rich feature wall.",
     before:
-      "https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=1400&q=80",
     after:
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=80",
   },
   {
-    id: "elevation",
+    id: "facade",
     label: "Exterior",
-    title: "Villa Elevation",
-    caption: "UV-stable elevation coating with a 10-year performance guarantee.",
+    title: "Home Exterior",
+    caption: "A weathered façade refreshed with a clean, modern colour scheme.",
     before:
       "https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=1400&q=80",
     after:
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80",
   },
 ];
 export const testimonials = [

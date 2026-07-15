@@ -157,7 +157,7 @@ export default function Footer() {
           {/* Studio */}
           <div className="lg:col-span-3">
             <h3 className="text-xs font-semibold uppercase tracking-luxe text-light-subtext dark:text-dark-subtext">
-              Studio
+             We Serve
             </h3>
 
             <address className="mt-4 space-y-2 text-sm not-italic text-light-subtext dark:text-dark-subtext">
