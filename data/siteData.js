@@ -306,7 +306,7 @@ export const portfolioItems = [
     id: "villa-serene",
     title: "Villa Serene",
     category: "interior",
-    location: "Bodakdev, Ahmedabad",
+    location: "Hamilton, ON",
     year: 2024,
     finish: "Low-VOC matte, warm neutrals",
     image:
@@ -316,7 +316,7 @@ export const portfolioItems = [
     id: "the-monsoon-house",
     title: "The Monsoon House",
     category: "exterior",
-    location: "Vastrapur, Ahmedabad",
+    location: "Burlington, ON",
     year: 2023,
     finish: "Elastomeric weather-shield",
     image:
@@ -326,7 +326,7 @@ export const portfolioItems = [
     id: "atelier-loft",
     title: "Atelier Loft",
     category: "texture",
-    location: "Prahlad Nagar, Ahmedabad",
+    location: "Oakville, ON",
     year: 2024,
     finish: "Venetian plaster feature wall",
     image:
@@ -336,7 +336,7 @@ export const portfolioItems = [
     id: "meridian-offices",
     title: "Meridian Offices",
     category: "commercial",
-    location: "SG Highway, Ahmedabad",
+    location: "Brantford, ON",
     year: 2023,
     finish: "Night-shift turnkey repaint",
     image:
@@ -346,7 +346,7 @@ export const portfolioItems = [
     id: "courtyard-residence",
     title: "Courtyard Residence",
     category: "interior",
-    location: "Thaltej, Ahmedabad",
+    location: "St. Catharines, ON",
     year: 2022,
     finish: "Lime wash, breathable finish",
     image:
@@ -356,7 +356,7 @@ export const portfolioItems = [
     id: "harbour-facade",
     title: "Harbour Façade",
     category: "exterior",
-    location: "Satellite, Ahmedabad",
+    location: "Ancaster, Hamilton, ON",
     year: 2024,
     finish: "UV-stable elevation system",
     image:
@@ -366,7 +366,7 @@ export const portfolioItems = [
     id: "gilded-lounge",
     title: "Gilded Lounge",
     category: "texture",
-    location: "Ambli, Ahmedabad",
+    location: "Dundas, Hamilton, ON",
     year: 2023,
     finish: "Metallic accent plaster",
     image:
@@ -376,7 +376,7 @@ export const portfolioItems = [
     id: "the-boutique-hotel",
     title: "The Boutique Hotel",
     category: "commercial",
-    location: "Navrangpura, Ahmedabad",
+    location: "Grimsby, ON",
     year: 2022,
     finish: "Phased hospitality refit",
     image:
