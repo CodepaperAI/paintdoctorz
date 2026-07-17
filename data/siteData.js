@@ -35,6 +35,7 @@ export const socials = [
   // { label: "LinkedIn", href: "https://linkedin.com/company/paintingdoctorz" },
   // { label: "Pinterest", href: "https://pinterest.com/paintingdoctorz" },
   // { label: "Houzz", href: "https://houzz.com/pro/paintingdoctorz" },
+  
 ];
 
 export const navLinks = [
