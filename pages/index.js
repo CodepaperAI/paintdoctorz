@@ -279,9 +279,9 @@ export default function HomePage() {
                   <h3 className="text-xl font-bold tracking-tight">
                     {service.title}
                   </h3>
-                  <span className="text-xs font-medium text-light-subtext dark:text-dark-subtext">
+                  {/* <span className="text-xs font-medium text-light-subtext dark:text-dark-subtext">
                     {service.startingPrice}
-                  </span>
+                  </span> */}
                 </div>
                 <p className="mt-3 text-sm leading-relaxed text-light-subtext dark:text-dark-subtext">
                   {service.summary}
