@@ -265,14 +265,14 @@ export default function WhyChooseUsPage() {
                 className="object-cover"
               />
             </div>
-            <div className="glass-panel absolute -bottom-6 -right-6 hidden rounded-3xl px-6 py-5 shadow-soft dark:shadow-soft-dark sm:block">
+            {/* <div className="glass-panel absolute -bottom-6 -right-6 hidden rounded-3xl px-6 py-5 shadow-soft dark:shadow-soft-dark sm:block">
               <p className="text-3xl font-bold text-light-accent dark:text-dark-accent">
                 10<span className="text-base">yr</span>
               </p>
               <p className="mt-1 text-xs text-light-subtext dark:text-dark-subtext">
                 Exterior performance guarantee
               </p>
-            </div>
+            </div> */}
           </motion.div>
 
           <div>

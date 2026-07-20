@@ -102,7 +102,7 @@ export const services = [
       "Trim, doors & ceiling detailing",
       "Daily site reset & final walkthrough",
     ],
-    startingPrice: "₹28 / sq.ft",
+    // startingPrice: "₹28 / sq.ft",
     icon: "brush",
   },
   {
@@ -114,12 +114,11 @@ export const services = [
     description:
       "Elevation coatings designed for the Indian climate. We repair, prime, and apply elastomeric weather-shield systems that resist cracking, algae, and fade for years.",
     deliverables: [
-      "Crack & seepage remediation",
+      "Crack & seepage remediation",  
       "Alkali-resistant priming",
       "Elastomeric weather-shield topcoat",
-      "10-year performance guarantee",
     ],
-    startingPrice: "₹34 / sq.ft",
+    // startingPrice: "₹34 / sq.ft",
     icon: "shield",
   },
   {
@@ -136,7 +135,7 @@ export const services = [
       "Sealed, wipe-clean protection",
       "Signed finish certificate",
     ],
-    startingPrice: "₹120 / sq.ft",
+    // startingPrice: "₹120 / sq.ft",
     icon: "sparkle",
   },
   {
@@ -153,7 +152,7 @@ export const services = [
       "Anti-corrosion metal priming",
       "Dust-free curing protocol",
     ],
-    startingPrice: "₹90 / sq.ft",
+    // startingPrice: "₹90 / sq.ft",
     icon: "layers",
   },
   {
@@ -170,7 +169,7 @@ export const services = [
       "Ponding & flood testing",
       "Warranty documentation",
     ],
-    startingPrice: "On survey",
+    // startingPrice: "On survey",
     icon: "drop",
   },
   {
@@ -187,7 +186,7 @@ export const services = [
       "Compliance & safety documentation",
       "Scheduled maintenance plan",
     ],
-    startingPrice: "Custom scope",
+    // startingPrice: "Custom scope",
     icon: "building",
   },
 ];
@@ -531,7 +530,7 @@ export const testimonials = [
 ];
 
 export const heroHighlights = [
-  "10-year exterior guarantee",
+  
   "Low-VOC premium coatings",
   "Fixed transparent pricing",
 ];
@@ -555,11 +554,11 @@ export const timelineOptions = [
 ];
 
 export const budgetOptions = [
-  "Under ₹50k",
-  "₹50k – ₹1.5L",
-  "₹1.5L – ₹4L",
-  "₹4L – ₹10L",
-  "₹10L+",
+  "$1,000 – $2,000",
+  "$2,000 – $4,000",
+  "$4,000 – $8,000",
+  "$8,000 – $12,000",
+  "$12,000 and above",
 ];
 
 /* ---- Interior Services page ---- */

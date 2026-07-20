@@ -109,7 +109,7 @@ const previews = [
     points: [
       "Crack & seepage remediation",
       "Elastomeric weather-shield topcoat",
-      "10-year performance guarantee",
+     
     ],
   },
 ];

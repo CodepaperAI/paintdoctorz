@@ -16,7 +16,7 @@ const STEPS = [
   { id: 4, label: "Review" },
 ];
 
-const propertyTypes = ["Apartment", "Independent house", "Villa", "Commercial"];
+const propertyTypes = ["Condo / Apartment", "Detached house", "Townhouse", "Commercial"];
 
 const initialForm = {
   projectType: "",
@@ -36,6 +36,44 @@ const fieldBase =
 
 const labelBase =
   "mb-2 block text-sm font-medium text-light-text dark:text-dark-text";
+
+// Area codes assigned to Canada under the NANP.
+const CANADIAN_AREA_CODES = new Set([
+  "204", "226", "236", "249", "250", "263", "289",
+  "306", "343", "354", "365", "367", "368", "382", "387",
+  "403", "416", "418", "428", "431", "437", "438", "450", "460", "468", "474",
+  "506", "514", "519", "548", "579", "581", "584", "587",
+  "604", "613", "639", "672", "683",
+  "705", "709", "742", "753", "778", "780", "782",
+  "807", "819", "825", "867", "873", "879",
+  "902", "905",
+]);
+
+function validateCanadianPhone(input) {
+  const digits = input.replace(/\D/g, "");
+  const national =
+    digits.length === 11 && digits.startsWith("1") ? digits.slice(1) : digits;
+
+  if (national.length !== 10) {
+    return "Enter a 10-digit Canadian number, e.g. (647) 850-6881.";
+  }
+  const area = national.slice(0, 3);
+  const exchange = national.slice(3, 6);
+  if (!/^[2-9]/.test(area) || !/^[2-9]/.test(exchange)) {
+    return "That doesn't look like a valid phone number.";
+  }
+  if (!CANADIAN_AREA_CODES.has(area)) {
+    return `${area} isn't a Canadian area code. We only serve Canada.`;
+  }
+  return null;
+}
+
+function formatPhone(input) {
+  const d = input.replace(/\D/g, "").slice(0, 10);
+  if (d.length <= 3) return d;
+  if (d.length <= 6) return `(${d.slice(0, 3)}) ${d.slice(3)}`;
+  return `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`;
+}
 
 function ChoiceGrid({ options, value, onSelect, columns = 2, name }) {
   return (
@@ -80,23 +118,43 @@ export default function BookPage() {
 
   const validateStep = () => {
     const next = {};
+
     if (step === 1 && !form.projectType) {
       next.projectType = "Please choose a project type.";
     }
+
     if (step === 2) {
       if (!form.propertyType) next.propertyType = "Select a property type.";
       if (!form.area.trim()) next.area = "Approximate area helps us quote.";
       if (!form.timeline) next.timeline = "When would you like to start?";
+      if (!form.budget) next.budget = "Please choose an indicative budget.";
     }
+
     if (step === 3) {
-      if (!form.name.trim()) next.name = "Please tell us your name.";
-      if (!/^\S+@\S+\.\S+$/.test(form.email)) {
+      if (!form.name.trim()) {
+        next.name = "Please tell us your name.";
+      } else if (form.name.trim().length < 2) {
+        next.name = "Please enter your full name.";
+      }
+
+      if (!form.email.trim()) {
+        next.email = "Please enter your email.";
+      } else if (!/^\S+@\S+\.\S+$/.test(form.email)) {
         next.email = "Enter a valid email address.";
       }
-      if (!/^[0-9+\-\s]{7,15}$/.test(form.phone)) {
-        next.phone = "Enter a valid phone number.";
+
+      if (!form.phone.trim()) {
+        next.phone = "Please enter your phone number.";
+      } else {
+        const phoneError = validateCanadianPhone(form.phone);
+        if (phoneError) next.phone = phoneError;
+      }
+
+      if (!form.address.trim()) {
+        next.address = "Please enter the site address.";
       }
     }
+
     setErrors(next);
     return Object.keys(next).length === 0;
   };
@@ -109,7 +167,6 @@ export default function BookPage() {
   const goBack = () => setStep((s) => Math.max(1, s - 1));
 
   const handleSubmit = () => {
-    // Front-end only: in production this would POST to an API route.
     setSubmitted(true);
   };
 
@@ -279,13 +336,13 @@ export default function BookPage() {
 
                     <div>
                       <label htmlFor="area" className={labelBase}>
-                        Approximate area (sq. ft or BHK)
+                        Approximate area (sq. ft or number of rooms)
                       </label>
                       <input
                         id="area"
                         type="text"
                         inputMode="text"
-                        placeholder="e.g. 1,450 sq.ft or 3 BHK"
+                        placeholder="e.g. 1,450 sq.ft or 3 bedrooms"
                         value={form.area}
                         onChange={(e) => update("area", e.target.value)}
                         className={fieldBase}
@@ -311,12 +368,7 @@ export default function BookPage() {
                     </div>
 
                     <div>
-                      <span className={labelBase}>
-                        Indicative budget{" "}
-                        <span className="font-normal text-light-subtext dark:text-dark-subtext">
-                          (optional)
-                        </span>
-                      </span>
+                      <span className={labelBase}>Indicative budget</span>
                       <ChoiceGrid
                         name="Budget"
                         options={budgetOptions}
@@ -324,6 +376,11 @@ export default function BookPage() {
                         onSelect={(v) => update("budget", v)}
                         columns={3}
                       />
+                      {errors.budget && (
+                        <p className="mt-2 text-sm text-red-500">
+                          {errors.budget}
+                        </p>
+                      )}
                     </div>
                   </fieldset>
                 )}
@@ -376,15 +433,22 @@ export default function BookPage() {
                         <label htmlFor="phone" className={labelBase}>
                           Phone
                         </label>
-                        <input
-                          id="phone"
-                          type="tel"
-                          autoComplete="tel"
-                          placeholder="+91 90000 12345"
-                          value={form.phone}
-                          onChange={(e) => update("phone", e.target.value)}
-                          className={fieldBase}
-                        />
+                        <div className="relative">
+                          <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm font-medium text-light-subtext dark:text-dark-subtext">
+                            +1
+                          </span>
+                          <input
+                            id="phone"
+                            type="tel"
+                            inputMode="tel"
+                            autoComplete="tel"
+                            placeholder="(647) 850-6881"
+                            value={form.phone}
+                            onChange={(e) => update("phone", formatPhone(e.target.value))}
+                            aria-invalid={errors.phone ? "true" : "false"}
+                            className={`${fieldBase} pl-11`}
+                          />
+                        </div>
                         {errors.phone && (
                           <p className="mt-2 text-sm text-red-500">
                             {errors.phone}
@@ -395,20 +459,22 @@ export default function BookPage() {
 
                     <div>
                       <label htmlFor="address" className={labelBase}>
-                        Site address{" "}
-                        <span className="font-normal text-light-subtext dark:text-dark-subtext">
-                          (optional)
-                        </span>
+                        Site address
                       </label>
                       <input
                         id="address"
                         type="text"
                         autoComplete="street-address"
-                        placeholder="Area, city"
+                        placeholder="Street, city, province"
                         value={form.address}
                         onChange={(e) => update("address", e.target.value)}
                         className={fieldBase}
                       />
+                      {errors.address && (
+                        <p className="mt-2 text-sm text-red-500">
+                          {errors.address}
+                        </p>
+                      )}
                     </div>
 
                     <div>
@@ -445,11 +511,11 @@ export default function BookPage() {
                         ["Property", form.propertyType],
                         ["Area", form.area],
                         ["Timeline", form.timeline],
-                        ["Budget", form.budget || "Not specified"],
+                        ["Budget", form.budget],
                         ["Name", form.name],
                         ["Email", form.email],
-                        ["Phone", form.phone],
-                        ["Address", form.address || "Not specified"],
+                        ["Phone", `+1 ${form.phone}`],
+                        ["Address", form.address],
                         ["Notes", form.notes || "—"],
                       ].map(([label, value]) => (
                         <div
@@ -491,7 +557,7 @@ export default function BookPage() {
 
           <p className="mt-6 text-center text-xs text-light-subtext dark:text-dark-subtext">
             Prefer to talk? Call{" "}
-            <a
+            <a 
               href={`tel:${company.phoneHref}`}
               className="font-medium text-light-accent dark:text-dark-accent"
             >
