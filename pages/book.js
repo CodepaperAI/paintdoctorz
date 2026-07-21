@@ -69,10 +69,7 @@ function validateCanadianPhone(input) {
 }
 
 function formatPhone(input) {
-  const d = input.replace(/\D/g, "").slice(0, 10);
-  if (d.length <= 3) return d;
-  if (d.length <= 6) return `(${d.slice(0, 3)}) ${d.slice(3)}`;
-  return `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}`;
+  return input.replace(/\D/g, "").slice(0, 10);
 }
 
 function ChoiceGrid({ options, value, onSelect, columns = 2, name }) {
@@ -442,7 +439,7 @@ export default function BookPage() {
                             type="tel"
                             inputMode="tel"
                             autoComplete="tel"
-                            placeholder="(647) 850-6881"
+                            placeholder="6478506881"
                             value={form.phone}
                             onChange={(e) => update("phone", formatPhone(e.target.value))}
                             aria-invalid={errors.phone ? "true" : "false"}
