@@ -28,7 +28,7 @@ export default async function handler(req, res) {
     const safeName = String(f.name).replace(/[\r\n]/g, " ").trim().slice(0, 70);
 
     await resend.emails.send({
-  from: `${safeName} <noreply@paintingdoctorz.ca>`,
+  from: `${safeName} <noreply@paintingdoctorz.com>`,
       to: process.env.CONTACT_TO_EMAIL,
       replyTo: f.email,
       subject: `New booking request — ${f.projectType} from ${f.name}`,
