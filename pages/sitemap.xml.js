@@ -1,6 +1,6 @@
 import { serviceAreas } from "../data/locations";
 
-const SITE = "https://paintdoctorz.vercel.app"; // ← change to https://paintingdoctorz.ca once the domain is live
+const SITE = " https://paintingdoctorz.ca"; // ← change to https://paintingdoctorz.ca once the domain is live
 
 function generateSiteMap() {
   const staticPaths = [
