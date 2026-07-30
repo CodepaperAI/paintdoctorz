@@ -24,9 +24,10 @@ const ArrowRight = (
 
 /* Animated numeric counter that runs once when scrolled into view. */
 function Counter({ value, suffix = "", duration = 2 }) {
+  
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
-  const [display, setDisplay] = useState(0);
+  const [display, setDisplay] = useState(value);
 
   useEffect(() => {
     if (!inView) return undefined;
@@ -103,7 +104,7 @@ const previews = [
   {
     title: "Exterior Painting",
     tag: "Exterior",
-    copy: "Weather-shield elevation systems engineered for monsoon and UV, backed by a decade-long colour and performance guarantee.",
+copy: "Weather-shield elevation systems engineered for Canadian freeze-thaw cycles and UV, backed by a decade-long colour and performance guarantee.",
     image:
       "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
     points: [

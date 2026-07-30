@@ -4,7 +4,7 @@
 export const company = {
   name: "Painting Doctorz",
   tagline: "Precision painting, prescribed with care.",
-  legalName: "Painting Doctorz Pvt. Ltd.",
+  legalName: "Painting Doctorz",
   foundedYear: 2009,
   description:
     "Painting Doctorz is a premium residential and commercial painting studio delivering clinical precision, museum-grade finishes, and a white-glove client experience across interior and exterior projects.",
@@ -78,13 +78,13 @@ export const navLinks = [
 ];
 
 export const businessHours = [
-  { day: "Monday", open: "08:00", close: "06:00" },
-  { day: "Tuesday",  open: "08:00", close: "06:00" },
-  { day: "Wednesday", open: "08:00", close: "06:00" },
-  { day: "Thursday", open: "08:00", close: "06:00" },
-  { day: "Friday", open: "08:00", close: "06:00" },
-  { day: "Saturday",  open: "08:00", close: "06:00" },
-  { day: "Sunday",  open: "08:00", close: "06:00" },
+  { day: "Monday", open: "08:00", close: "18:00" },
+  { day: "Tuesday", open: "08:00", close: "18:00" },
+  { day: "Wednesday", open: "08:00", close: "18:00" },
+  { day: "Thursday", open: "08:00", close: "18:00" },
+  { day: "Friday", open: "08:00", close: "18:00" },
+  { day: "Saturday", open: "09:00", close: "16:00" },
+  { day: "Sunday", open: null, close: null },
 ];
 
 export const services = [
@@ -110,7 +110,7 @@ export const services = [
     title: "Exterior Painting",
     category: "exterior",
     summary:
-      "Weather-shield systems built to survive monsoon, UV, and salt with a decade-long colour guarantee.",
+  "Weather-shield systems built to survive freeze-thaw winters, UV, and rain with a decade-long colour guarantee.",
     description:
       "Elevation coatings designed for the Indian climate. We repair, prime, and apply elastomeric weather-shield systems that resist cracking, algae, and fade for years.",
     deliverables: [
@@ -225,10 +225,10 @@ export const milestones = [
 ];
 
 export const stats = [
-  { value: 4200, suffix: "+", label: "Projects completed" },
+  { value: 1200, suffix: "+", label: "Projects completed" },
   { value: 15, suffix: "yrs", label: "Years of craft" },
   { value: 98, suffix: "%", label: "Client recommendation" },
-  { value: 62, suffix: "", label: "Specialist artisans" },
+  { value: 24, suffix: "", label: "Specialist painters" },
 ];
 
 export const processSteps = [
@@ -498,34 +498,35 @@ export const transformations = [
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80",
   },
 ];
+
 export const testimonials = [
   {
-    name: "Ananya Mehta",
-    role: "Homeowner, Bodakdev",
+    name: "Sarah Thompson",
+    role: "Homeowner, Hamilton",
     rating: 5,
     quote:
-      "The most organised trade we have ever hired. They protected every surface, finished a day early, and the walls look like glass.",
+      "The most organised trade we've ever hired. They protected every surface, finished a day early, and the walls look flawless.",
   },
   {
-    name: "Rohan Desai",
-    role: "Architect, Studio Desai",
+    name: "Michael Chen",
+    role: "Homeowner, Burlington",
     rating: 5,
     quote:
-      "I specify Painting Doctorz on every luxury project. Their finish quality under raking light is genuinely in a class of its own.",
+      "Transparent pricing, no surprises, and a team you actually enjoy having in your home. The finish is immaculate.",
   },
   {
-    name: "Priya Nair",
-    role: "GM, Meridian Offices",
+    name: "Jennifer Nadeau",
+    role: "Property Manager, Oakville",
     rating: 5,
     quote:
-      "They repainted three floors on night shifts with zero business downtime. Immaculate coordination from survey to handover.",
+      "They repainted our units on schedule with zero disruption to tenants. Coordination from quote to handover was seamless.",
   },
   {
-    name: "Vikram Shah",
-    role: "Homeowner, Thaltej",
+    name: "David Roberts",
+    role: "Homeowner, St. Catharines",
     rating: 5,
     quote:
-      "The lime-wash feature wall is a work of art. Transparent pricing, no surprises, and a team you actually enjoy having at home.",
+      "Our exterior looks brand new and has held up beautifully through a full winter. Genuinely impressed with the prep work.",
   },
 ];
 

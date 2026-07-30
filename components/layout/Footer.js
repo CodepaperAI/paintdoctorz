@@ -113,7 +113,14 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
-
+<li>
+                <Link
+                  href="/painters"
+                  className="text-sm text-light-text transition-colors duration-300 hover:text-light-accent dark:text-dark-text dark:hover:text-dark-accent"
+                >
+                  Service Areas
+                </Link>
+              </li>
               <li>
                 <Link
                   href="/book"
