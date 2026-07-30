@@ -17,39 +17,28 @@ const CANADIAN_AREA_CODES = new Set([
   "902", "905",
 ]);
 
-// Returns an error string, or null when the number is a valid Canadian one.
 function validateCanadianPhone(input) {
   const digits = input.replace(/\D/g, "");
-
-  // Accept an optional leading country code "1".
-  const national = digits.length === 11 && digits.startsWith("1")
-    ? digits.slice(1)
-    : digits;
+  const national =
+    digits.length === 11 && digits.startsWith("1") ? digits.slice(1) : digits;
 
   if (national.length !== 10) {
     return "Enter a 10-digit Canadian number, e.g. (647) 850-6881.";
   }
-
   const area = national.slice(0, 3);
   const exchange = national.slice(3, 6);
-
-  // NANP: area code and exchange must both start 2–9.
   if (!/^[2-9]/.test(area) || !/^[2-9]/.test(exchange)) {
     return "That doesn't look like a valid phone number.";
   }
-
   if (!CANADIAN_AREA_CODES.has(area)) {
     return `${area} isn't a Canadian area code. We only serve Canada.`;
   }
-
   return null;
 }
 
-// Formats as the user types: (647) 850-6881
 function formatPhone(input) {
   return input.replace(/\D/g, "").slice(0, 10);
 }
-
 
 const fieldBase =
   "w-full rounded-2xl border border-light-border bg-light-surface px-4 py-3.5 text-sm text-light-text transition-colors duration-300 placeholder:text-light-subtext/70 focus:border-light-accent focus-visible:ring-2 focus-visible:ring-light-accent dark:border-dark-border dark:bg-dark-surface dark:text-dark-text dark:placeholder:text-dark-subtext/60 dark:focus:border-dark-accent dark:focus-visible:ring-dark-accent";
@@ -89,31 +78,48 @@ function formatHours(entry) {
 }
 
 export default function ContactPage() {
- const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [errors, setErrors] = useState({});
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const update = (key, val) => {
     setForm((prev) => ({ ...prev, [key]: val }));
     setErrors((prev) => ({ ...prev, [key]: undefined }));
   };
 
-  const handleSubmit = (event) => {
-  event.preventDefault();
-  const next = {};
-  if (!form.name.trim()) next.name = "Please enter your name.";
-  if (!/^\S+@\S+\.\S+$/.test(form.email)) next.email = "Enter a valid email.";
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const next = {};
+    if (!form.name.trim()) next.name = "Please enter your name.";
+    if (!/^\S+@\S+\.\S+$/.test(form.email)) next.email = "Enter a valid email.";
+    const phoneError = validateCanadianPhone(form.phone);
+    if (phoneError) next.phone = phoneError;
+    if (!form.message.trim()) next.message = "Let us know how we can help.";
+    setErrors(next);
+    if (Object.keys(next).length > 0) return;
 
-  const phoneError = validateCanadianPhone(form.phone);
-  if (phoneError) next.phone = phoneError;
-
-  if (!form.message.trim()) next.message = "Let us know how we can help.";
-  setErrors(next);
-  if (Object.keys(next).length === 0) {
-    setSent(true);
-    setForm({ name: "", email: "", phone: "", message: "" });
-  }
-};
+    setSending(true);
+    setSubmitError("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Something went wrong. Please try again.");
+      }
+      setSent(true);
+      setForm({ name: "", email: "", phone: "", message: "" });
+    } catch (err) {
+      setSubmitError(err.message);
+    } finally {
+      setSending(false);
+    }
+  };
 
   const contactPoints = [
     {
@@ -218,7 +224,7 @@ export default function ContactPage() {
 
             <div className="flex flex-wrap gap-2">
               {socials.map((social) => (
-                <a
+             <a   
                   key={social.label}
                   href={social.href}
                   target="_blank"
@@ -286,37 +292,39 @@ export default function ContactPage() {
                       <p className="mt-2 text-sm text-red-500">{errors.name}</p>
                     )}
                   </div>
-<div>
-  <label htmlFor="c-phone" className={labelBase}>
-    Phone
-  </label>
-  <div className="relative">
-    <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm font-medium text-light-subtext dark:text-dark-subtext">
-      +1
-    </span>
-    <input
-      id="c-phone"
-      type="tel"
-      inputMode="tel"
-      autoComplete="tel"
-      placeholder="6478506881"
-      value={form.phone}
-      onChange={(e) => update("phone", formatPhone(e.target.value))}
-      aria-invalid={errors.phone ? "true" : "false"}
-      aria-describedby={errors.phone ? "c-phone-error" : undefined}
-      className={`${fieldBase} pl-11`}
-    />
-  </div>
-  {errors.phone ? (
-    <p id="c-phone-error" className="mt-2 text-sm text-red-500">
-      {errors.phone}
-    </p>
-  ) : (
-    <p className="mt-2 text-xs text-light-subtext dark:text-dark-subtext">
-      Canadian numbers only.
-    </p>
-  )}
-</div>
+
+                  <div>
+                    <label htmlFor="c-phone" className={labelBase}>
+                      Phone
+                    </label>
+                    <div className="relative">
+                      <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm font-medium text-light-subtext dark:text-dark-subtext">
+                        +1
+                      </span>
+                      <input
+                        id="c-phone"
+                        type="tel"
+                        inputMode="tel"
+                        autoComplete="tel"
+                        placeholder="6478506881"
+                        value={form.phone}
+                        onChange={(e) => update("phone", formatPhone(e.target.value))}
+                        aria-invalid={errors.phone ? "true" : "false"}
+                        aria-describedby={errors.phone ? "c-phone-error" : undefined}
+                        className={`${fieldBase} pl-11`}
+                      />
+                    </div>
+                    {errors.phone ? (
+                      <p id="c-phone-error" className="mt-2 text-sm text-red-500">
+                        {errors.phone}
+                      </p>
+                    ) : (
+                      <p className="mt-2 text-xs text-light-subtext dark:text-dark-subtext">
+                        Canadian numbers only.
+                      </p>
+                    )}
+                  </div>
+
                   <div>
                     <label htmlFor="c-email" className={labelBase}>
                       Email
@@ -354,8 +362,12 @@ export default function ContactPage() {
                     )}
                   </div>
 
-                  <Button type="submit" size="lg" className="w-full">
-                    Send message
+                  {submitError && (
+                    <p className="text-sm text-red-500">{submitError}</p>
+                  )}
+
+                  <Button type="submit" size="lg" className="w-full" disabled={sending}>
+                    {sending ? "Sending…" : "Send message"}
                   </Button>
                 </div>
               </form>

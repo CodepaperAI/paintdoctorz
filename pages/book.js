@@ -43,7 +43,7 @@ const CANADIAN_AREA_CODES = new Set([
   "306", "343", "354", "365", "367", "368", "382", "387",
   "403", "416", "418", "428", "431", "437", "438", "450", "460", "468", "474",
   "506", "514", "519", "548", "579", "581", "584", "587",
-  "604", "613", "639", "672", "683",
+  "604", "613", "639", "647", "672", "683",
   "705", "709", "742", "753", "778", "780", "782",
   "807", "819", "825", "867", "873", "879",
   "902", "905",
@@ -107,6 +107,8 @@ export default function BookPage() {
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const update = (key, val) => {
     setForm((prev) => ({ ...prev, [key]: val }));
@@ -163,8 +165,25 @@ export default function BookPage() {
 
   const goBack = () => setStep((s) => Math.max(1, s - 1));
 
-  const handleSubmit = () => {
-    setSubmitted(true);
+  const handleSubmit = async () => {
+    setSending(true);
+    setSubmitError("");
+    try {
+      const res = await fetch("/api/book", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Something went wrong. Please try again.");
+      }
+      setSubmitted(true);
+    } catch (err) {
+      setSubmitError(err.message);
+    } finally {
+      setSending(false);
+    }
   };
 
   const resetForm = () => {
@@ -172,6 +191,7 @@ export default function BookPage() {
     setErrors({});
     setStep(1);
     setSubmitted(false);
+    setSubmitError("");
   };
 
   const progress = (step / STEPS.length) * 100;
@@ -533,12 +553,19 @@ export default function BookPage() {
               </motion.div>
             </AnimatePresence>
 
+            {/* Submit error */}
+            {submitError && (
+              <p className="mt-6 text-center text-sm text-red-500">
+                {submitError}
+              </p>
+            )}
+
             {/* Nav buttons */}
-            <div className="mt-10 flex items-center justify-between gap-4">
+            <div className="mt-6 flex items-center justify-between gap-4">
               <Button
                 onClick={goBack}
                 variant="ghost"
-                disabled={step === 1}
+                disabled={step === 1 || sending}
                 className={step === 1 ? "invisible" : ""}
               >
                 Back
@@ -547,15 +574,17 @@ export default function BookPage() {
               {step < 4 ? (
                 <Button onClick={goNext}>Continue</Button>
               ) : (
-                <Button onClick={handleSubmit}>Confirm booking</Button>
+                <Button onClick={handleSubmit} disabled={sending}>
+                  {sending ? "Sending…" : "Confirm booking"}
+                </Button>
               )}
             </div>
           </div>
 
           <p className="mt-6 text-center text-xs text-light-subtext dark:text-dark-subtext">
             Prefer to talk? Call{" "}
-            <a 
-              href={`tel:${company.phoneHref}`}
+            
+          <a    href={`tel:${company.phoneHref}`}
               className="font-medium text-light-accent dark:text-dark-accent"
             >
               {company.phoneDisplay}
