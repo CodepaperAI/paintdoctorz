@@ -84,7 +84,7 @@ export const businessHours = [
   { day: "Thursday", open: "08:00", close: "18:00" },
   { day: "Friday", open: "08:00", close: "18:00" },
   { day: "Saturday", open: "09:00", close: "16:00" },
-  { day: "Sunday", open: null, close: null },
+  { day: "Sunday", open: "09:00", close: "16:00" },
 ];
 
 export const services = [
