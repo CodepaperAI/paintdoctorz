@@ -13,7 +13,7 @@ A production-grade, enterprise-ready luxury website for **Painting Doctorz**, a 
 - **Motion:** Framer Motion (page transitions, scroll reveals, micro-interactions)
 - **Images:** `next/image`
 - **SEO:** `next/head` with Open Graph, Twitter Cards, and JSON-LD (LocalBusiness + Service schema)
-
+.
 ---
 
 ## Getting started
