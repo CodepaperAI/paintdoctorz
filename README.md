@@ -35,6 +35,21 @@ npm run start
 
 ---
 
+## Environment variables
+
+Create `.env.local` for local development and set these values in production:
+
+```bash
+UPLIFT_API_TOKEN=your_uplift_api_token
+
+# Optional. Leave unset unless Uplift changes the public API base URL.
+# UPLIFT_API_BASE_URL=https://api.upliftai.co/api/public/v1
+```
+
+The blog pages use the server-side Uplift endpoint, so `UPLIFT_API_TOKEN` is not exposed in the browser bundle.
+
+---
+
 ## Project structure
 
 ```

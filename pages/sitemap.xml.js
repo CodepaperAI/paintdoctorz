@@ -10,6 +10,7 @@ function generateSiteMap() {
     "/interior-services",
     "/exterior-services",
     "/portfolio",
+    "/blog",
     "/contact",
     "/book",
     "/painters",
